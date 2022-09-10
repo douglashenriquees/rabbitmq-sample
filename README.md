@@ -7,6 +7,10 @@
 * ```cd project_name```
 * ```dotnet add package RabbitMQ.Client```
 
+## Executando o Projeto
+
+* ```dotnet run --project project_name```
+
 ## Executando o Container do RabbitMQ
 
 * ```docker run -d -p 15672:15672 rabbitmq:3-management```
