@@ -14,16 +14,20 @@ using (var connection = factory.CreateConnection())
     using (var channel = connection.CreateModel())
     {
         channel.QueueDeclare(
-            "saudacao_1", // nome da fila
-            false, // ativo após o servidor ser reiniciado?
-            false, // só pode ser acessada na conexão atual?
-            false, // é removida após os consumidores utilizarem a fila?
-            null);
+            queue: "saudacao_1", // nome da fila
+            durable: false, // ativo após o servidor ser reiniciado?
+            exclusive: false, // só pode ser acessada na conexão atual?
+            autoDelete: false, // é removida após os consumidores utilizarem a fila?
+            arguments: null);
 
         var message = "Bem-vindo ao RabbitMQ";
         var body = Encoding.UTF8.GetBytes(message);
 
-        channel.BasicPublish("", "saudacao_1");
+        channel.BasicPublish(
+            exchange: "",
+            routingKey: "saudacao_1",
+            basicProperties: null,
+            body: body);
 
         Console.WriteLine($" [X] Enviada: {message}");
     }
